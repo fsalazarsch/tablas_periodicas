@@ -1,12 +1,12 @@
-## tablas_periodicas ##
+# Tablas periodicas #
 Coleccion de Tablas periodicas en HTML5 y CSS
 
 <u>NOTA:</u> Por el momento esta sin optimizar y en un archivo único, conforme vaya pasando el tiempo implemntare nuevas funciones y sugerencias
 
-# Desarrollando 
+## Desarrollando ##
  - Tabla de lenguajes de progrmamcón 
 
-# Ideas por realizar
+## Ideas por realizar ##
 - Tabla periodica de elementos quimicos (clásica)
 - Tabla de Herramientas Devops
 - Plugins de Wordpress 
