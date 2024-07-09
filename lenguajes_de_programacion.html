@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Periódica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            margin: 0;
+        }
+        .table {
+            display: grid;
+            grid-template-columns: repeat(18, 1fr);
+            grid-template-rows: repeat(9, 1fr);
+            gap: 5px;
+            background-color: white;
+            padding: 55px 20px 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .element {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            padding: 5px;
+            text-align: center;
+            font-size: 12px;
+            position: relative;
+            width: 55px;
+            height: 55px;
+        }
+        .element span {
+            font-weight: bold;
+        }
+        .element .number {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 10px;
+        }
+        .element .symbol {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        .element .name {
+            font-size: 10px;
+            margin-top: 5px;
+        }
+        .element:hover {
+            background-color: #d0d0d0;
+        }
+        .empty {
+            visibility: hidden;
+        }
+
+        .line{
+          height: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .table {
+            }
+            .element {
+                font-size: 10px;
+                padding: 3px;
+            }
+            .element .symbol {
+                font-size: 14px;
+                margin-top: 5px;
+            }
+            .element .name {
+                font-size: 8px;
+                margin-top: 2px;
+            }
+        }
+        .procedural{
+          background-color: gold;
+        }
+        .data-oriented{
+          background-color: teal;
+          color: white;
+        }
+        .multi-paradigm{
+          background-color: indianred;
+        }
+        .concurent{
+          background-color: lightsalmon;
+        }
+        .visual{
+          background-color: lightcoral;
+        }
+        .declarative{
+          background-color: lightslategray;
+        }
+        .imperative{
+          background-color: darkslategray;
+          color: white;
+        }
+        .scripting{
+          background-color: darkorange;
+        }
+        .functional{
+          background-color: plum;
+        }
+        .other{
+          background-color: aquamarine;
+        }
+        .education{
+          background-color: #333;
+          color: white;
+        }
+        .object-oriented{
+          background-color: darkslateblue;
+          color: white;
+        }
+        .legend{
+          padding-bottom: 5px;
+        }
+
+        .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.lightbox-content {
+    margin: 15% auto;
+    padding: 20px;
+    background-color: white;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+    <div class="table">
+        <div class="element procedural"><span class="number">1</span><span class="symbol">Vb</span><span class="name">Visual Basic</span></div>
+        <div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div>
+
+        <div>
+          <button  onclick="openLightbox()">Leyenda</button>
+        </div>
+
+        <div class="empty"></div>
+        <div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div>
+        <div class="element data-oriented"><span class="number">2</span><span class="symbol">Db</span><span class="name">Dbase</span></div>
+        <div class="element multi-paradigm"><span class="number">3</span><span class="symbol">Oz</span><span class="name">OZ</span></div>
+        <div class="element concurent"><span class="number">4</span><span class="symbol">Ad</span><span class="name">Ada</span></div>
+        <div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div>
+        <div class="element visual"><span class="number">5</span><span class="symbol">Ac</span><span class="name">Alice</span></div>
+        <div class="element declarative"><span class="number">6</span><span class="symbol">Pr</span><span class="name">Prolog</span></div>
+        <div class="element procedural"><span class="number">7</span><span class="symbol">Xp</span><span class="name">X++</span></div>
+        <div class="element procedural"><span class="number">8</span><span class="symbol">Bc</span><span class="name">Bcpl</span></div>
+        <div class="element procedural"><span class="number">9</span><span class="symbol">Nm</span><span class="name">Nim</span></div>
+        <div class="element data-oriented"><span class="number">10</span><span class="symbol">Ca</span><span class="name">Cache</span></div>
+        <div class="element multi-paradigm"><span class="number">11</span><span class="symbol">Sw</span><span class="name">Swift</span></div>
+        <div class="element concurent"><span class="number">12</span><span class="symbol">Pi</span><span class="name">Pict</span></div>
+        <div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div>
+        <div class="element imperative"><span class="number">13</span><span class="symbol">Ft</span><span class="name">Fortran</span></div>
+        <div class="element visual"><span class="number">14</span><span class="symbol">Bl</span><span class="name">Blockly</span></div>
+        <div class="element declarative"><span class="number">15</span><span class="symbol">Sq</span><span class="name">SQL</span></div>
+        <div class="element declarative"><span class="number">16</span><span class="symbol">Qm</span><span class="name">Qml</span></div>
+        <div class="element procedural"><span class="number">17</span><span class="symbol">Ob</span><span class="name">Oberon 2</span></div>
+        <div class="element data-oriented"><span class="number">18</span><span class="symbol">Sp</span><span class="name">Sparql</span></div>
+
+        <div class="element multi-paradigm"><span class="number">19</span><span class="symbol">Mt</span><span class="name">Matlab</span></div>
+        <div class="element concurent"><span class="number">20</span><span class="symbol">Er</span><span class="name">Erlang</span></div>
+        <div class="element scripting"><span class="number">21</span><span class="symbol">Lu</span><span class="name">Lua</span></div>
+        <div class="element scripting"><span class="number">22</span><span class="symbol">Tc</span><span class="name">Tcl</span></div>
+        <div class="element scripting"><span class="number">23</span><span class="symbol">Ps</span><span class="name">PowerShell</span></div>
+        <div class="element scripting"><span class="number">24</span><span class="symbol">Vs</span><span class="name">VbScript</span></div>
+        <div class="element scripting"><span class="number">25</span><span class="symbol">Gm</span><span class="name">Gml</span></div>
+        <div class="element scripting"><span class="number">26</span><span class="symbol">Es</span><span class="name">Ecmascript</span></div>
+        <div class="element scripting"><span class="number">27</span><span class="symbol">Ph</span><span class="name">PHP</span></div>
+        <div class="element scripting"><span class="number">28</span><span class="symbol">Da</span><span class="name">Dart</span></div>
+        <div class="element scripting"><span class="number">29</span><span class="symbol">Ap</span><span class="name">Apple Script</span></div>
+        <div class="element scripting"><span class="number">30</span><span class="symbol">Ox</span><span class="name">Object Rexx</span></div>
+        <div class="element imperative"><span class="number">31</span><span class="symbol">Pc</span><span class="name">Pascal</span></div>
+        <div class="element visual"><span class="number">32</span><span class="symbol">Sb</span><span class="name">Scratch</span></div>
+        <div class="element visual"><span class="number">33</span><span class="symbol">Cr</span><span class="name">Catrobat</span></div>
+        <div class="element declarative"><span class="number">34</span><span class="symbol">Mo</span><span class="name">Modelica</span></div>
+        <div class="element procedural"><span class="number">35</span><span class="symbol">Ne</span><span class="name">Nemerle</span></div>
+        <div class="element data-oriented"><span class="number">36</span><span class="symbol">Vf</span><span class="name">Visual FoxPro</span></div>
+
+        <div class="element multi-paradigm"><span class="number">37</span><span class="symbol">Wf</span><span class="name">Wolfram</span></div>
+        <div class="element concurent"><span class="number">38</span><span class="symbol">Rs</span><span class="name">Rust</span></div>
+        <div class="element scripting"><span class="number">39</span><span class="symbol">R</span><span class="name">R</span></div>
+        <div class="element scripting"><span class="number">40</span><span class="symbol">El</span><span class="name">Emacs Lisp</span></div>
+        <div class="element scripting"><span class="number">41</span><span class="symbol">Pa</span><span class="name">Pascal Script</span></div>
+        <div class="element scripting"><span class="number">42</span><span class="symbol">Cs</span><span class="name">Coffee Script</span></div>
+        <div class="element scripting"><span class="number">43</span><span class="symbol">Fx</span><span class="name">Flux</span></div>
+        <div class="element scripting"><span class="number">44</span><span class="symbol">Rx</span><span class="name">Rexx</span></div>
+        <div class="element scripting"><span class="number">45</span><span class="symbol">As</span><span class="name">AngelScript</span></div>
+        <div class="element scripting"><span class="number">46</span><span class="symbol">Gd</span><span class="name">GdScript</span></div>
+        <div class="element scripting"><span class="number">47</span><span class="symbol">Jl</span><span class="name">Julia</span></div>
+        <div class="element scripting"><span class="number">48</span><span class="symbol">Rb</span><span class="name">Robol</span></div>
+        <div class="element imperative"><span class="number">49</span><span class="symbol">Al</span><span class="name">Algol</span></div>
+        <div class="element imperative"><span class="number">50</span><span class="symbol">Cb</span><span class="name">Cobol</span></div>
+        <div class="element visual"><span class="number">51</span><span class="symbol">Ra</span><span class="name">Racket</span></div>
+        <div class="element visual"><span class="number">52</span><span class="symbol">Sn</span><span class="name">Snap!</span></div>
+        <div class="element procedural"><span class="number">53</span><span class="symbol">Ft</span><span class="name">Forth</span></div>
+        <div class="element data-oriented"><span class="number">54</span><span class="symbol">Cn</span><span class="name">Clarion</span></div>
+
+        <div class="element multi-paradigm"><span class="number">55</span><span class="symbol">Go</span><span class="name">Golang</span></div>
+        <div class="element concurent"><span class="number">56</span><span class="symbol">Ck</span><span class="name">Chuck</span></div>
+        <div class="element functional"><span class="number">57-71</span><span class="symbol">S</span><span class="name">Sac</span></div>
+        <div class="element scripting"><span class="number">72</span><span class="symbol">G</span><span class="name">Groovy</span></div>
+        <div class="element scripting"><span class="number">73</span><span class="symbol">Ls</span><span class="name">Live Script</span></div>
+        <div class="element scripting"><span class="number">74</span><span class="symbol">Mx</span><span class="name">MaxScript</span></div>
+        <div class="element scripting"><span class="number">75</span><span class="symbol">A</span><span class="name">Awk</span></div>
+        <div class="element scripting"><span class="number">76</span><span class="symbol">Lr</span><span class="name">Lasso</span></div>
+        <div class="element scripting"><span class="number">77</span><span class="symbol">Js</span><span class="name">JavaScript</span></div>
+        <div class="element scripting"><span class="number">78</span><span class="symbol">Ts</span><span class="name">TypeScript</span></div>
+        <div class="element scripting"><span class="number">79</span><span class="symbol">Sq</span><span class="name">Squirrel</span></div>
+        <div class="element scripting"><span class="number">80</span><span class="symbol">Au</span><span class="name">Autoit</span></div>
+        <div class="element imperative"><span class="number">81</span><span class="symbol">B</span><span class="name">Basic</span></div>
+        <div class="element imperative"><span class="number">82</span><span class="symbol">Md</span><span class="name">Modula-2</span></div>
+        <div class="element imperative"><span class="number">83</span><span class="symbol">D</span><span class="name">Dlang</span></div>
+        <div class="element imperative"><span class="number">84</span><span class="symbol">C</span><span class="name">C</span></div>
+        <div class="element visual"><span class="number">85</span><span class="symbol">Jb</span><span class="name">Just Basic</span></div>
+        <div class="element data-oriented"><span class="number">86</span><span class="symbol">Cr</span><span class="name">Clipper</span></div>
+
+        <div class="element multi-paradigm"><span class="number">87</span><span class="symbol">Rh</span><span class="name">Ring</span></div>
+        <div class="element concurent"><span class="number">88</span><span class="symbol">Lm</span><span class="name">Limbo</span></div>
+        <div class="element other"><span class="number">89-103</span><span class="symbol">A</span><span class="name">Assembly</span></div>
+        <div class="element scripting"><span class="number">104</span><span class="symbol">Cf</span><span class="name">ColdFusion</span></div>
+        <div class="element scripting"><span class="number">105</span><span class="symbol">Bh</span><span class="name">Bean Shell</span></div>
+        <div class="element scripting"><span class="number">106</span><span class="symbol">Re</span><span class="name">Red</span></div>
+        <div class="element scripting"><span class="number">107</span><span class="symbol">Lc</span><span class="name">Lucee</span></div>
+        <div class="element scripting"><span class="number">108</span><span class="symbol">Ah</span><span class="name">Autohotkey</span></div>
+        <div class="element education"><span class="number">109</span><span class="symbol">Sh</span><span class="name">SpreadSheet</span></div>
+        <div class="element education"><span class="number">110</span><span class="symbol">Xo</span><span class="name">Xod</span></div>
+        <div class="element education"><span class="number">111</span><span class="symbol">Rb</span><span class="name">Ruby</span></div>
+        <div class="element education"><span class="number">112</span><span class="symbol">Sk</span><span class="name">Simulink</span></div>
+        <div class="element education"><span class="number">113</span><span class="symbol">Pd</span><span class="name">Pure Data</span></div>
+        <div class="element education"><span class="number">114</span><span class="symbol">Gr</span><span class="name">GrassHopper</span></div>
+        <div class="element education"><span class="number">115</span><span class="symbol">Lm</span><span class="name">Limnor</span></div>
+        <div class="element education"><span class="number">116</span><span class="symbol">Dn</span><span class="name">Drakon</span></div>
+        <div class="element education"><span class="number">117</span><span class="symbol">Am</span><span class="name">Ampl</span></div>
+        <div class="element education"><span class="number">118</span><span class="symbol">An</span><span class="name">Analytica</span></div> 
+
+
+
+        <div class="empty"></div><div class="empty"></div>
+        <div class="element functional"><span class="number">57</span><span class="symbol">F</span><span class="name">F#</span></div>
+        <div class="element functional"><span class="number">58</span><span class="symbol">Cj</span><span class="name">Clojure</span></div>
+        <div class="element functional"><span class="number">59</span><span class="symbol">Ex</span><span class="name">Elixir</span></div>
+        <div class="element functional"><span class="number">60</span><span class="symbol">Hs</span><span class="name">Haskell</span></div>
+        <div class="element functional"><span class="number">61</span><span class="symbol">Sc</span><span class="name">Scala</span></div>
+        <div class="element functional"><span class="number">62</span><span class="symbol">E</span><span class="name">Elm</span></div>
+        <div class="element functional"><span class="number">63</span><span class="symbol">Kt</span><span class="name">Kotlin</span></div>
+        <div class="element functional"><span class="number">64</span><span class="symbol">Re</span><span class="name">ReasonMl</span></div>
+        <div class="element functional"><span class="number">65</span><span class="symbol">Pu</span><span class="name">Pure Script</span></div>
+        <div class="element functional"><span class="number">66</span><span class="symbol">Cl</span><span class="name">Common Lisp</span></div>
+        <div class="element functional"><span class="number">67</span><span class="symbol">Oc</span><span class="name">Ocaml</span></div>
+        <div class="element functional"><span class="number">68</span><span class="symbol">Sw</span><span class="name">Swift</span></div>
+        <div class="element functional"><span class="number">69</span><span class="symbol">Le</span><span class="name">Lean</span></div>
+        <div class="element functional"><span class="number">70</span><span class="symbol">Sm</span><span class="name">Scheme</span></div>
+        <div class="element functional"><span class="number">71</span><span class="symbol">Id</span><span class="name">Idris</span></div>
+        <div class="empty"></div>
+
+        <div class="empty"></div><div class="empty"></div>
+        <div class="element object-oriented"><span class="number">89</span><span class="symbol">Jv</span><span class="name">Java</span></div>
+        <div class="element object-oriented"><span class="number">90</span><span class="symbol">Cp</span><span class="name">C++</span></div>
+        <div class="element object-oriented"><span class="number">91</span><span class="symbol">Rb</span><span class="name">Ruby</span></div>
+        <div class="element object-oriented"><span class="number">92</span><span class="symbol">St</span><span class="name">Smalltalk</span></div>
+        <div class="element object-oriented"><span class="number">93</span><span class="symbol">Cs</span><span class="name">C#</span></div>
+        <div class="element object-oriented"><span class="number">94</span><span class="symbol">Py</span><span class="name">Python</span></div>
+        <div class="element object-oriented"><span class="number">95</span><span class="symbol">Dp</span><span class="name">Delphi</span></div>
+        <div class="element object-oriented"><span class="number">96</span><span class="symbol">Oc</span><span class="name">Objective-C</span></div>
+        <div class="element object-oriented"><span class="number">97</span><span class="symbol">Ef</span><span class="name">Eiffel</span></div>
+        <div class="element object-oriented"><span class="number">98</span><span class="symbol">Pl</span><span class="name">Perl</span></div>
+        <div class="element object-oriented"><span class="number">99</span><span class="symbol">Ce</span><span class="name">Ceylon</span></div>
+        <div class="element object-oriented"><span class="number">100</span><span class="symbol">Hb</span><span class="name">Harbour</span></div>
+        <div class="element object-oriented"><span class="number">101</span><span class="symbol">Ec</span><span class="name">eC</span></div>
+        <div class="element object-oriented"><span class="number">102</span><span class="symbol">Si</span><span class="name">Simula</span></div>
+        <div class="element object-oriented"><span class="number">103</span><span class="symbol">Lc</span><span class="name">Livecode</span></div>
+        <div class="empty"></div>
+    </div>
+
+    <div id="lightbox" class="lightbox">
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <div class="lightbox-content">
+            <div class="legend"><span class="procedural">&emsp;</span>  Procedural</div>
+            <div class="legend"><span class="multi-paradigm">&emsp;</span>  Multi-paradigma</div>
+            <div class="legend"><span class="declarative">&emsp;</span>  Declarativo</div>
+            <div class="legend"><span class="concurent">&emsp;</span>  Concurrente</div>
+            <div class="legend"><span class="scripting">&emsp;</span>  Script</div>
+            <div class="legend"><span class="functional">&emsp;</span>  Funcional</div>
+            <div class="legend"><span class="data-oriented">&emsp;</span>  Orientado a datos</div>
+            <div class="legend"><span class="object-oriented">&emsp;</span>  Orientado a Objetos</div>
+            <div class="legend"><span class="imperative">&emsp;</span>  Imperativo</div>
+            <div class="legend"><span class="visual">&emsp;</span>  Visual</div>
+            <div class="legend"><span class="education">&emsp;</span>  Educacional</div>
+        </div>
+    </div>
+</body>
+
+<script>
+  function openLightbox() {
+    document.getElementById('lightbox').style.display = 'block';
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+}
+</script>
+</html>
