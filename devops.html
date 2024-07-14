@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Periódica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            margin: 0;
+        }
+        .table {
+            display: grid;
+            grid-template-columns: repeat(18, 1fr);
+            grid-template-rows: repeat(9, 1fr);
+            gap: 5px;
+            background-color: white;
+            padding: 55px 20px 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .element {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            padding: 5px;
+            text-align: center;
+            font-size: 12px;
+            position: relative;
+            width: 55px;
+            height: 55px;
+        }
+        .element span {
+            font-weight: bold;
+        }
+        .element .licence {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 10px;
+        }
+        .element .number {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: 10px;
+        }
+
+        .element .symbol {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        .element .name {
+            font-size: 10px;
+            margin-top: 5px;
+        }
+        .element:hover {
+            background-color: #d0d0d0;
+            color: black;
+        }
+        .empty {
+            visibility: hidden;
+        }
+
+        .line{
+          height: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .table {
+            }
+            .element {
+                font-size: 10px;
+                padding: 3px;
+            }
+            .element .symbol {
+                font-size: 14px;
+                margin-top: 5px;
+            }
+            .element .name {
+                font-size: 8px;
+                margin-top: 2px;
+            }
+        }
+
+        .cloud{
+          background-color: darkblue;
+          color: white;
+        }
+        
+        .containers{
+          background-color: darkmagenta;
+          color: white;
+        }
+        .config{
+            background-color: #bbb;
+        }
+
+        .security{
+          background-color: teal;
+          color: white;
+        }
+        
+
+        .scm{
+          background-color: gold;
+        }
+
+        .deployment{
+          background-color: limegreen;
+        }
+
+        .testing{
+          background-color: orangered;
+          color: white;
+        }
+
+        .ci{
+            background-color: dodgerblue;
+        }
+
+        .build{
+            background-color: lightseagreen;
+        }
+        .logging{
+          background-color: lime;
+        }
+        .repomgmt{
+          background-color: lightslategray;
+        }
+        .release{
+          background-color: orchid;
+        }
+        .database{
+          background-color: darkorange;
+        }
+        .collaboration{
+          background-color: skyblue;
+        }
+        .monitoring{
+          background-color: #333;
+          color: white;
+        }
+        .object{
+          background-color: #eee;
+          padding: 3px;
+        }
+        .legend{
+          padding-bottom: 5px;
+          text-align: justify;
+        }
+
+        .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.lightbox-content {
+    display: block ruby;
+    margin: 15% auto;
+    padding: 20px;
+    background-color: white;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+    <div class="table">
+        <div class="element database"><span class="number">1</span>
+            <span class="licence">En</span>
+            <span class="symbol">O</span><span class="name">12c</span></div>
+        <div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div>
+
+        <div>
+          <button  onclick="openLightbox()">Leyenda</button>
+        </div>
+
+        <div class="empty"></div>
+        <div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div>
+        <div class="element cloud"><span class="number">2</span><span class="licence">Fm</span><span class="symbol">Aw</span><span class="name">AWS</span></div>
+        <div class="element database"><span class="number">3</span><span class="licence">Os</span><span class="symbol">My</span><span class="name">MySQL</span></div>
+        <div class="element scm"><span class="number">4</span><span class="licence">Os</span><span class="symbol">Gt</span><span class="name">Git</span></div>
+        <div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div>
+        <div class="element config"><span class="number">5</span><span class="licence">En</span><span class="symbol">Ch</span><span class="name">Chef</span></div>
+        <div class="element config"><span class="number">6</span><span class="licence">En</span><span class="symbol">Pu</span><span class="name">Puppet</span></div>
+        <div class="element config"><span class="number">7</span><span class="licence">En</span><span class="symbol">An</span><span class="name">Ansible</span></div>
+        <div class="element config"><span class="number">8</span><span class="licence">Os</span><span class="symbol">Sl</span><span class="name">Salt</span></div>
+        <div class="element containers"><span class="number">9</span><span class="licence">Os</span><span class="symbol">Dk</span><span class="name">Docker</span></div>
+        <div class="element cloud"><span class="number">10</span><span class="licence">Pd</span><span class="symbol">Az</span><span class="name">Azure</span></div>
+        <div class="element database"><span class="number">11</span><span class="licence">En</span><span class="symbol">Mq</span><span class="name">MSSQL</span></div>
+        <div class="element scm"><span class="number">12</span><span class="licence">Os</span><span class="symbol">Sv</span><span class="name">Subversion</span></div>
+        <div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div>
+        <div class="element deployment"><span class="number">13</span><span class="licence">Fr</span><span class="symbol">Ss</span><span class="name">SSH</span></div>
+        <div class="element config"><span class="number">14</span><span class="licence">En</span><span class="symbol">Bl</span><span class="name">BladeLogic</span></div>
+        <div class="element config"><span class="number">15</span><span class="licence">Os</span><span class="symbol">Va</span><span class="name">Vagrant</span></div>
+        <div class="element config"><span class="number">16</span><span class="licence">Fr</span><span class="symbol">Tf</span><span class="name">Terraform</span></div>
+        <div class="element containers"><span class="number">17</span><span class="licence">Os</span><span class="symbol">Rk</span><span class="name">rKT</span></div>
+        <div class="element cloud"><span class="number">18</span><span class="licence">Fm</span><span class="symbol">Hk</span><span class="name">Heroku</span></div>
+
+        <div class="element database"><span class="number">19</span><span class="licence">Os</span><span class="symbol">Pq</span><span class="name">PostgreSQL</span></div>
+        <div class="element scm"><span class="number">20</span><span class="licence">Fr</span><span class="symbol">Mc</span><span class="name">Mercurial</span></div>
+        <div class="element build"><span class="number">21</span><span class="licence">Os</span><span class="symbol">Mv</span><span class="name">Maven</span></div>
+        <div class="element build"><span class="number">22</span><span class="licence">Os</span><span class="symbol">Gr</span><span class="name">Gradle</span></div>
+        <div class="element build"><span class="number">23</span><span class="licence">En</span><span class="symbol">Mr</span><span class="name">Meister</span></div>
+        <div class="element ci"><span class="number">24</span><span class="licence">Os</span><span class="symbol">Jn</span><span class="name">Jenkins</span></div>
+        <div class="element ci"><span class="number">25</span><span class="licence">Pd</span><span class="symbol">Bb</span><span class="name">Bamboo</span></div>
+        <div class="element ci"><span class="number">26</span><span class="licence">Os</span><span class="symbol">Tr</span><span class="name">TravisCi</span></div>
+        <div class="element repomgmt"><span class="number">27</span><span class="licence">Fr</span><span class="symbol">Ar</span><span class="name">Archiva</span></div>
+        <div class="element testing"><span class="number">28</span><span class="licence">Os</span><span class="symbol">Fn</span><span class="name">FitNesse</span></div>
+        <div class="element testing"><span class="number">29</span><span class="licence">Fr</span><span class="symbol">Se</span><span class="name">Selenium</span></div>
+        <div class="element testing"><span class="number">30</span><span class="licence">Os</span><span class="symbol">Gt</span><span class="name">Gatling</span></div>
+        <div class="element deployment"><span class="number">31</span><span class="licence">Pd</span><span class="symbol">Gd</span><span class="name">Deployment Manager</span></div>
+        <div class="element deployment"><span class="number">32</span><span class="licence">Os</span><span class="symbol">Sf</span><span class="name">SmartFrog</span></div>
+        <div class="element config"><span class="number">33</span><span class="licence">Fr</span><span class="symbol">Cb</span><span class="name">Cobbler</span></div>
+        <div class="element config"><span class="number">34</span><span class="licence">Os</span><span class="symbol">Bc</span><span class="name">Bcfg2</span></div>
+        <div class="element containers"><span class="number">35</span><span class="licence">Os</span><span class="symbol">Kb</span><span class="name">Kubernetes</span></div>
+        <div class="element cloud"><span class="number">36</span><span class="licence">En</span><span class="symbol">Rs</span><span class="name">Rackspace</span></div>
+
+        <div class="element database"><span class="number">37</span><span class="licence">Os</span><span class="symbol">Mg</span><span class="name">MongoDb</span></div>
+        <div class="element scm"><span class="number">38</span><span class="licence">Fm</span><span class="symbol">Gh</span><span class="name">Github</span></div>
+        <div class="element build"><span class="number">39</span><span class="licence">Os</span><span class="symbol">Br</span><span class="name">Buildr</span></div>
+        <div class="element build"><span class="number">40</span><span class="licence">Os</span><span class="symbol">At</span><span class="name">ANT</span></div>
+        <div class="element build"><span class="number">41</span><span class="licence">Fm</span><span class="symbol">Bm</span><span class="name">Build Master</span></div>
+        <div class="element ci"><span class="number">42</span><span class="licence">Fm</span><span class="symbol">Cs</span><span class="name">Codeship</span></div>
+        <div class="element ci"><span class="number">43</span><span class="licence">Fm</span><span class="symbol">Sn</span><span class="name">Snap CI</span></div>
+        <div class="element ci"><span class="number">44</span><span class="licence">Fm</span><span class="symbol">Cr</span><span class="name">CircleCI</span></div>
+        <div class="element repomgmt"><span class="number">45</span><span class="licence">Os</span><span class="symbol">Nx</span><span class="name">Nexus</span></div>
+        <div class="element testing"><span class="number">46</span><span class="licence">Fr</span><span class="symbol">Cu</span><span class="name">Cucumber</span></div>
+        <div class="element testing"><span class="number">47</span><span class="licence">Os</span><span class="symbol">Cj</span><span class="name">Cucumber.js</span></div>
+        <div class="element testing"><span class="number">48</span><span class="licence">Fr</span><span class="symbol">Qu</span><span class="name">QUnit</span></div>
+        <div class="element deployment"><span class="number">49</span><span class="licence">Fr</span><span class="symbol">Cp</span><span class="name">Capistrano</span></div>
+        <div class="element deployment"><span class="number">50</span><span class="licence">Fr</span><span class="symbol">Ju</span><span class="name">Juju</span></div>
+        <div class="element deployment"><span class="number">51</span><span class="licence">Os</span><span class="symbol">Rd</span><span class="name">Rundeck</span></div>
+        <div class="element config"><span class="number">52</span><span class="licence">Os</span><span class="symbol">Cf</span><span class="name">CFEngine</span></div>
+        <div class="element containers"><span class="number">53</span><span class="licence">Fr</span><span class="symbol">Pk</span><span class="name">Packer</span></div>
+        <div class="element cloud"><span class="number">54</span><span class="licence">Fm</span><span class="symbol">Bx</span><span class="name">Bluemix</span></div>
+
+        <div class="element database"><span class="number">55</span><span class="licence">En</span><span class="symbol">Db</span><span class="name">Db2</span></div>
+        <div class="element scm"><span class="number">56</span><span class="licence">Fm</span><span class="symbol">Bb</span><span class="name">Bitbucket</span></div>
+        <div class="element build"><span class="number">57</span><span class="licence">Fm</span><span class="symbol">Qb</span><span class="name">QuickBuild</span></div>
+        <div class="element build"><span class="number">58</span><span class="licence">En</span><span class="symbol">Ub</span><span class="name">UrbanCode Build</span></div>
+        <div class="element build"><span class="number">59</span><span class="licence">Pd</span><span class="symbol">Ta</span><span class="name">Visual Build</span></div>
+        <div class="element ci"><span class="number">60</span><span class="licence">Fm</span><span class="symbol">Tc</span><span class="name">TeamCity</span></div>
+        <div class="element ci"><span class="number">61</span><span class="licence">Fm</span><span class="symbol">Sh</span><span class="name">Shippable</span></div>
+        <div class="element ci"><span class="number">62</span><span class="licence">Os</span><span class="symbol">Cc</span><span class="name">Cruise Control</span></div>
+        <div class="element repomgmt"><span class="number">63</span><span class="licence">Os</span><span class="symbol">Ay</span><span class="name">Artifactory</span></div>
+        <div class="element testing"><span class="number">64</span><span class="licence">Fr</span><span class="symbol">Ju</span><span class="name">JUnit</span></div>
+        <div class="element testing"><span class="number">65</span><span class="licence">Fr</span><span class="symbol">Jm</span><span class="name">Jmeter</span></div>
+        <div class="element testing"><span class="number">66</span><span class="licence">Fr</span><span class="symbol">Tn</span><span class="name">TestNG</span></div>
+        <div class="element deployment"><span class="number">67</span><span class="licence">En</span><span class="symbol">Rd</span><span class="name">RapidDeploy</span></div>
+        <div class="element deployment"><span class="number">68</span><span class="licence">Fm</span><span class="symbol">Cy</span><span class="name">CodeDeploy</span></div>
+        <div class="element deployment"><span class="number">69</span><span class="licence">En</span><span class="symbol">Oc</span><span class="name">Octopus Deploy</span></div>
+        <div class="element deployment"><span class="number">70</span><span class="licence"></span><span class="symbol">No</span><span class="name">CA Nolio</span></div>
+        <div class="element containers"><span class="number">71</span><span class="licence">En</span><span class="symbol">Eb</span><span class="name">ElasticBox</span></div>
+        <div class="element cloud"><span class="number">72</span><span class="licence">En</span><span class="symbol">Ad</span><span class="name">Apprenda</span></div>
+
+        <div class="element database"><span class="number">73</span><span class="symbol">Cs</span><span class="name">Cassandra</span></div>
+        <div class="element scm"><span class="number">74</span><span class="licence">En</span><span class="symbol">Hx</span><span class="name">Helix</span></div>
+        <div class="element build"><span class="number">75</span><span class="licence">Os</span><span class="symbol">Ms</span><span class="name">MSBuild</span></div>
+        <div class="element build"><span class="number">76</span><span class="licence">Os</span><span class="symbol">Rk</span><span class="name">Rake</span></div>
+        <div class="element build"><span class="number">77</span><span class="licence">Os</span><span class="symbol">Lb</span><span class="name">LuntBuild</span></div>
+        <div class="element ci"><span class="number">78</span><span class="licence">Os</span><span class="symbol">Cu</span><span class="name">Continuum</span></div>
+        <div class="element ci"><span class="number">79</span><span class="licence">Fm</span><span class="symbol">Ca</span><span class="name">Continua CI</span></div>
+        <div class="element ci"><span class="number">80</span><span class="licence">Os</span><span class="symbol">Gu</span><span class="name">Gump</span></div>
+        <div class="element repomgmt"><span class="number">81</span><span class="licence">Os</span><span class="symbol">Ng</span><span class="name">NuGet</span></div>
+        <div class="element testing"><span class="number">82</span><span class="licence">Os</span><span class="symbol">Ap</span><span class="name">Appium</span></div>
+        <div class="element testing"><span class="number">83</span><span class="licence">En</span><span class="symbol">Xl</span><span class="name">XL TestView</span></div>
+        <div class="element testing"><span class="number">84</span><span class="licence">En</span><span class="symbol">Tc</span><span class="name">TestComplete</span></div>
+        <div class="element deployment"><span class="number">85</span><span class="licence">Os</span><span class="symbol">Go</span><span class="name">Go</span></div>
+        <div class="element deployment"><span class="number">86</span><span class="licence">En</span><span class="symbol">Ef</span><span class="name">ElectroFlow</span></div>
+        <div class="element deployment"><span class="number">87</span><span class="licence">En</span><span class="symbol">Xd</span><span class="name">XL Deploy</span></div>
+        <div class="element deployment"><span class="number">88</span><span class="licence">En</span><span class="symbol">Ud</span><span class="name">UrbanCode Deploy</span></div>
+        <div class="element containers"><span class="number">89</span><span class="licence">Os</span><span class="symbol">Mo</span><span class="name">Mesos</span></div>
+        <div class="element cloud"><span class="number">90</span><span class="licence">Os</span><span class="symbol">Cf</span><span class="name">Cloud Foundry</span></div> 
+
+        <div class="empty"></div><div class="empty"></div>
+        <div class="element release"><span class="number">91</span><span class="licence">En</span><span class="symbol">Xr</span><span class="name">XL Release</span></div>
+        <div class="element release"><span class="number">92</span><span class="licence">En</span><span class="symbol">Ur</span><span class="name">UrbanCode Release</span></div>
+        <div class="element release"><span class="number">93</span><span class="licence">En</span><span class="symbol">Ls</span><span class="name">CAService Virt</span></div>
+        <div class="element release"><span class="number">94</span><span class="licence">En</span><span class="symbol">Bm</span><span class="name">BMCRelease Process</span></div>
+        <div class="element release"><span class="number">95</span><span class="licence">En</span><span class="symbol">Hp</span><span class="name">HP Coder</span></div>
+        <div class="element release"><span class="number">96</span><span class="licence">Pd</span><span class="symbol">Ex</span><span class="name">Excel</span></div>
+        <div class="element release"><span class="number">97</span><span class="licence">En</span><span class="symbol">Pl</span><span class="name">Plutora Release</span></div>
+        <div class="element release"><span class="number">98</span><span class="licence">En</span><span class="symbol">Sr</span><span class="name">Serena Release</span></div>
+        <div class="element collaboration"><span class="number">99</span><span class="licence">Fm</span><span class="symbol">Tr</span><span class="name">Trello</span></div>
+        <div class="element collaboration"><span class="number">100</span><span class="licence">Pd</span><span class="symbol">Jr</span><span class="name">Jira</span></div>
+        <div class="element collaboration"><span class="number">101</span><span class="licence">Fm</span><span class="symbol">Rf</span><span class="name">HipChat</span></div>
+        <div class="element collaboration"><span class="number">102</span><span class="licence">Fm</span><span class="symbol">Sl</span><span class="name">Slack</span></div>
+        <div class="element collaboration"><span class="number">103</span><span class="licence">Fm</span><span class="symbol">Fd</span><span class="name">Flowdock</span></div>
+        <div class="element collaboration"><span class="number">104</span><span class="licence">Pd</span><span class="symbol">Pv</span><span class="name">Pivotal Tracker</span></div>
+        <div class="element collaboration"><span class="number">105</span><span class="licence">En</span><span class="symbol">Sn</span><span class="name">ServiceNow</span></div>
+        <div class="empty"></div>
+
+        <div class="empty"></div><div class="empty"></div>
+        <div class="element monitoring"><span class="number">106</span><span class="licence">En</span><span class="symbol">Sp</span><span class="name">Splunk</span></div>
+        <div class="element monitoring"><span class="number">107</span><span class="licence">Os</span><span class="symbol">Ki</span><span class="name">Kibana</span></div>
+        <div class="element monitoring"><span class="number">108</span><span class="licence">Fm</span><span class="symbol">Nr</span><span class="name">New Relic</span></div>
+        <div class="element monitoring"><span class="number">109</span><span class="licence">Os</span><span class="symbol">Ni</span><span class="name">Nagios</span></div>
+        <div class="element monitoring"><span class="number">110</span><span class="licence">Os</span><span class="symbol">Gg</span><span class="name">Ganglia</span></div>
+        <div class="element monitoring"><span class="number">111</span><span class="licence">Os</span><span class="symbol">Ct</span><span class="name">Cacti</span></div>
+        <div class="element monitoring"><span class="number">112</span><span class="licence">Os</span><span class="symbol">Gr</span><span class="name">Graphite</span></div>
+        <div class="element monitoring"><span class="number">113</span><span class="licence">Os</span><span class="symbol">Ic</span><span class="name">Icinga</span></div>
+        <div class="element logging"><span class="number">114</span><span class="licence">Fm</span><span class="symbol">Sl</span><span class="name">SumoLogic</span></div>
+        <div class="element logging"><span class="number">115</span><span class="licence">Os</span><span class="symbol">Ls</span><span class="name">Logstash</span></div>
+        <div class="element logging"><span class="number">116</span><span class="licence">Fm</span><span class="symbol">Lg</span><span class="name">Loggly</span></div>
+        <div class="element logging"><span class="number">117</span><span class="licence">Os</span><span class="symbol">Gr</span><span class="name">GrayLog</span></div>
+        <div class="element security"><span class="number">118</span><span class="licence">Os</span><span class="symbol">Sn</span><span class="name">Snort</span></div>
+        <div class="element security"><span class="number">119</span><span class="licence">Os</span><span class="symbol">Tr</span><span class="name">Tripwire</span></div>
+        <div class="element security"><span class="number">120</span><span class="licence">En</span><span class="symbol">Cy</span><span class="name">CyberArk</span></div>
+        <div class="empty"></div>
+    </div>
+
+    <div id="lightbox" class="lightbox">
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <div class="lightbox-content">
+            <div class="col">
+            <div class="legend"><span class="object">Os</span>  Open Source</div>
+            <div class="legend"><span class="object">Fr</span>  Free </div>
+            <div class="legend"><span class="object">Fm</span>  Freemium </div>
+            <div class="legend"><span class="object">Pd</span>  Paid </div>
+            <div class="legend"><span class="object">En</span>  Enterprise </div>
+            <div class="legend"><br></div>
+            <div class="legend"><br></div>
+            <div class="legend"><br></div>
+            <div class="legend"><br></div>
+            <div class="legend"><br></div>
+            
+            </div>
+            <div class="col">
+
+            <div class="legend"><span class="database">&emsp;</span>   Database</div>
+            <div class="legend"><span class="ci">&emsp;</span> CI</div>
+            <div class="legend"><span class="deployment">&emsp;</span> Deployment</div>
+            <div class="legend"><span class="cloud">&emsp;</span>  Cloud / Iaas / Paas</div>
+            <div class="legend"><span class="monitoring">&emsp;</span> BI / Monitoring</div>
+            <div class="legend"><span class="scm">&emsp;</span> SCM</div>
+            <div class="legend"><span class="repomgmt">&emsp;</span>  Repo Mgmt</div>
+            <div class="legend"><span class="config">&emsp;</span>  Config / Provisioning</div>
+            <div class="legend"><span class="release">&emsp;</span>  Release Mgmt</div>
+            <div class="legend"><span class="logging">&emsp;</span>  Logging</div>
+            <div class="legend"><span class="build">&emsp;</span>  Build</div>
+            <div class="legend"><span class="testing">&emsp;</span>  Testing</div>
+            <div class="legend"><span class="containers">&emsp;</span>  Container</div>
+            <div class="legend"><span class="collaboration">&emsp;</span> Collaboration</div>
+            <div class="legend"><span class="security">&emsp;</span>  Security</div>
+        </div>
+        </div>
+    </div>
+</body>
+
+<script>
+  function openLightbox() {
+    document.getElementById('lightbox').style.display = 'block';
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+}
+</script>
+</html>
