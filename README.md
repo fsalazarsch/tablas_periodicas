@@ -6,6 +6,3 @@ Coleccion de Tablas periodicas en HTML5 y CSS
 ## Desarrollando ##
  - Tabla de lenguajes de progrmamción 
  - Tabla de Herramientas Devops
-
-## Ideas por realizar ##
-- Plugins de Wordpress 
