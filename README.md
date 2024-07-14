@@ -8,5 +8,4 @@ Coleccion de Tablas periodicas en HTML5 y CSS
  - Tabla de Herramientas Devops
 
 ## Ideas por realizar ##
-- Tabla periodica de elementos quimicos (clásica)
 - Plugins de Wordpress 
